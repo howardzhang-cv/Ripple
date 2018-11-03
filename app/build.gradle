@@ -26,5 +26,8 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:28.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+
+    compile 'com.google.android.gms:play-services-nearby:11.6.0'
+
     testCompile 'junit:junit:4.12'
 }
