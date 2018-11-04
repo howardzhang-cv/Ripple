@@ -1,4 +1,4 @@
-package co.ripple.ripple
+package co.ripple.ripple;
 
 /** Enumeration class for possible Channels for users
  *  to push, view, and respond to requests from.
@@ -37,7 +37,7 @@ enum Channel {
      * Otherwise, return null. */
     static Channel byID(int id) {
         for (Channel channel : Channel.values()) {
-            if (channel.id() == id) {
+            if (channel.getID() == id) {
                 return channel;
             }
         }
