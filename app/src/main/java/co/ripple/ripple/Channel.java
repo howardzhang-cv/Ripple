@@ -17,7 +17,7 @@ enum Channel {
     /** This channel's integer ID. */
     private int _id;
 
-    /** A channel with display name CHANNELNAME and id CHANNELID*/
+    /** A channel with display name CHANNELNAME and id CHANNELID. */
     Channel(String channelName, int channelID) {
         _name = channelName;
         _id = channelID;
@@ -48,7 +48,7 @@ enum Channel {
      * Otherwise, return null. */
     static Channel byName(String name) {
         for (Channel channel : Channel.values()) {
-            if (channel.name() == name) {
+            if (channel.getName() == name) {
                 return channel;
             }
         }
