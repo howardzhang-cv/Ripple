@@ -13,11 +13,15 @@ import com.google.android.gms.nearby.messages.Message;
 import com.google.android.gms.nearby.messages.MessageListener;
 import com.google.android.gms.nearby.messages.MessagesClient;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     public User user;
     public MessageListener messageListener;
     public MessagesClient client;
+
+    public ArrayList<String> channels = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         client = Nearby.getMessagesClient(this);
 
         //initialize user preferences
-        //user = new User(this);
+        user = new User(this);
 
         //initialize listener
         messageListener = new MessageListener(){
@@ -68,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
         client.unsubscribe(messageListener);
         user.unpublishSent(client);
+        user.save();
     }
 
     //called when request is to be published
