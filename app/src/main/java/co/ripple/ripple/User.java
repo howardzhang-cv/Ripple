@@ -40,6 +40,7 @@ public class User {
         SharedPreferences sp = context.getSharedPreferences("ripple", Context.MODE_PRIVATE);
         username = sp.getString("username", "anonymous");
         location = sp.getString("location", "unavailable");
+        channels = new ArrayList<>();
         String channelString = sp.getString("channel", "");
         String[] channelSplit = channelString.split(" ");
         if(!channelString.equals("")) {

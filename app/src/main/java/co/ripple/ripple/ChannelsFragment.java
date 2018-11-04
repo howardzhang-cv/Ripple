@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import java.util.ArrayList;
 
@@ -39,6 +40,8 @@ public class ChannelsFragment extends Fragment {
         Toolbar toolbar = view.findViewById(R.id.tool_bar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
         setupRecyclerView();
+
+
     }
 
     private void setupRecyclerView(){
@@ -47,14 +50,19 @@ public class ChannelsFragment extends Fragment {
         mLayoutManager = new LinearLayoutManager(mContext);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        ArrayList<String> test = new ArrayList<>();
+        /*ArrayList<String> test = new ArrayList<>();
         test.add("channel 1");
-        test.add("channel 2");
-        ChannelsAdapter adapter = new ChannelsAdapter(test);
+        test.add("channel 2");*/
+        ChannelsAdapter adapter = new ChannelsAdapter(((MainActivity) getActivity()).channels);
         mRecyclerView.setAdapter(adapter);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mRecyclerView.getContext(), mLayoutManager.getOrientation());
         mRecyclerView.addItemDecoration(dividerItemDecoration);
 
+    }
+
+    public void addChannel(String name){
+        ((MainActivity) getActivity()).channels.add(name);
+        mRecyclerView.getAdapter().notifyDataSetChanged();
     }
 
 }
