@@ -33,17 +33,37 @@ public class User {
     private List<Request> received;
     private List<Integer> channels;
 
+    //reference context for access to preferences
+    private Context context;
+
     public User(Context context) {
         SharedPreferences sp = context.getSharedPreferences("ripple", Context.MODE_PRIVATE);
         username = sp.getString("username", "anonymous");
         location = sp.getString("location", "unavailable");
         String channelString = sp.getString("channel", "");
         String[] channelSplit = channelString.split(" ");
-        for(String channel : channelSplit){
-            channels.add(Integer.parseInt(channel));
+        if(!channelString.equals("")) {
+            for (String channel : channelSplit) {
+                channels.add(Integer.parseInt(channel));
+            }
         }
         sent = new ArrayList<Message>();
         received = new ArrayList<Request>();
+        this.context = context;
+    }
+
+    //saves values into preferences
+    public void save(){
+        SharedPreferences sp = context.getSharedPreferences("ripple", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString("username", username);
+        editor.putString("location", location);
+        String channelString = "";
+        for(int channelId : channels){
+            channelString += channelId + " ";
+        }
+        editor.putString("channel", channelString.trim());
+        editor.commit();
     }
 
     //adds and removes from list of subscribed channels

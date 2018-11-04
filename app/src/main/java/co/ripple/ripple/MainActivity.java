@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
         client.unsubscribe(messageListener);
         user.unpublishSent(client);
+        user.save();
     }
 
     //called when request is to be published
