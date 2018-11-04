@@ -24,12 +24,34 @@ enum Channel {
     }
 
     /** Return this channel's display name. */
-    String name() {
+    String getName() {
         return _name;
     }
 
     /** Return this channel's id. */
-    int id() {
+    int getID() {
         return _id;
+    }
+
+    /** Return the channel specified by ID, if exists.
+     * Otherwise, return null. */
+    static Channel byID(int id) {
+        for (Channel channel : Channel.values()) {
+            if (channel.id() == id) {
+                return channel;
+            }
+        }
+        return null;
+    }
+
+    /** Return the channel specified by NAME, if exists.
+     * Otherwise, return null. */
+    static Channel byName(String name) {
+        for (Channel channel : Channel.values()) {
+            if (channel.name() == name) {
+                return channel;
+            }
+        }
+        return null;
     }
 }
