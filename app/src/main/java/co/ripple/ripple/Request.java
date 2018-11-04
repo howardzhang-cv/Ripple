@@ -1,7 +1,11 @@
 package co.ripple.ripple;
 
-public Class Request {
-    private int channelID;
+import com.google.android.gms.nearby.messages.Message;
+
+import java.util.Scanner;
+
+public class Request {
+    private int channelId;
     private String title;
     private String body;
     private String senderAddr;
@@ -11,11 +15,12 @@ public Class Request {
         this.channelId = channelID;
         this.title = title;
         this.body = body;
-        this.senderAddr = sender.address;
-        this.senderPort = sender.port;
+        this.senderAddr = sender.getAddress();
+        this.senderPort = sender.getPort();
     }
 
-    /** For TESTING purposes ONLY!
+    /**
+     * For TESTING purposes ONLY!
      */
     public Request(int channelID, String title, String body) {
         this.channelId = channelID;
@@ -35,23 +40,23 @@ public Class Request {
      * Each field size will be delimited by a "-".
      * This is how the request is serialized:
      * "CHANNELIDSIZE-TITLESIZE-BODYSIZE-SENDERADDRSIZE-SENDERPORTSIZE-
-     *  channelID title body senderAddr senderPort"
-     *  NOTE: There are not actually any spaces between characters on line 28, this is
-     *  just for readability.
+     * channelID title body senderAddr senderPort"
+     * NOTE: There are not actually any spaces between characters on line 28, this is
+     * just for readability.
      */
-    public String serialize()  {
+    public String serialize() {
         String metadata;
-        String cid = Integer.toString(channelID);
+        String cid = Integer.toString(channelId);
         String idLen = Integer.toString(cid.length());
         metadata = idLen + "-" + Integer.toString(title.length()) + "-" + Integer.toString(body.length()) +
-            "-" + Integer.toString(senderAddr.length()) + "-" + Integer.toString(senderPort.length()) + "-";
+                "-" + Integer.toString(senderAddr.length()) + "-" + Integer.toString(senderPort.length()) + "-";
         String request = cid + title + body + senderAddr + senderPort;
         request = metadata + request;
         return request;
     }
 
     public int getChannelId() {
-        return this.channelID;
+        return this.channelId;
     }
 
     private void deserialize(String message) {
@@ -59,18 +64,17 @@ public Class Request {
         int[] sizes = new int[5];
         String[] fields = new String[5];
         for (int i = 0; i < 5; i++) {
-            sizes[i] = String.toInteger(curr.next());
+            sizes[i] = Integer.parseInt(sc.next());
         }
         String request = sc.next();
         int start = 0;
         int end = sizes[0];
-        fields[0] = String.toInteger(request.substring(start, end));
+        this.channelId = Integer.parseInt(request.substring(start, end));
         for (int i = 1; i < 5; i++) {
             start = end;
             end += sizes[i];
             fields[i] = request.substring(start, end);
         }
-        this.channelID = fields[0];
         this.title = fields[1];
         this.body = fields[2];
         this.senderAddr = fields[3];

@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         messageListener = new MessageListener(){
             @Override
             public void onFound(Message message) {
-                Request request = new Request(message.getContent());
+                Request request = new Request(new String(message.getContent()));
                 if(user.isIncluded(request.getChannelId())){
                     user.addReceived(request);
                 }
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onLost(Message message) {
-                Request request = new Request(message.getContent());
+                Request request = new Request(new String(message.getContent()));
                 if(user.isIncluded(request.getChannelId())){
                     user.removeReceived(request);
                 }
@@ -67,8 +67,9 @@ public class MainActivity extends AppCompatActivity {
 
     //called when request is to be published
     public void publishRequest(Request r){
-        client.publish(new Message(r.serialize().getBytes()));
-        user.addSent(r);
+        Message message = new Message(r.serialize().getBytes());
+        client.publish(message);
+        user.addSent(message);
     }
 
 }
