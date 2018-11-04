@@ -59,6 +59,22 @@ public class Request {
         return this.channelId;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public String getSenderAddr() {
+        return senderAddr;
+    }
+
+    public String getSenderPort() {
+        return senderPort;
+    }
+
     private void deserialize(String message) {
         Scanner sc = new Scanner(message).useDelimiter("-");
         int[] sizes = new int[5];

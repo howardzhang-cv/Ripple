@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Andrew Kim on 11/3/18.
@@ -15,6 +16,10 @@ import java.util.ArrayList;
 public class ChannelsAdapter extends RecyclerView.Adapter {
 
     private ArrayList<String> channels;
+
+    public ChannelsAdapter(List<String> channels){
+        this.channels = (ArrayList) channels;
+    }
 
     public static class ChannelsViewHolder extends RecyclerView.ViewHolder{
 
@@ -33,7 +38,6 @@ public class ChannelsAdapter extends RecyclerView.Adapter {
         View v =  LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.snippet_channel_entry, viewGroup, false);
         ChannelsViewHolder vh = new ChannelsViewHolder(v);
         return vh;
-
     }
 
     @Override

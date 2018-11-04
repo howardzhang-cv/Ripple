@@ -1,5 +1,8 @@
 package co.ripple.ripple;
 
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -21,14 +24,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = findViewById(R.id.tool_bar);
-        setSupportActionBar(toolbar);
+        ChannelsFragment fragment = new ChannelsFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, fragment);
+        transaction.commit();
 
         //initialize Google Nearby client
         client = Nearby.getMessagesClient(this);
 
         //initialize user preferences
-        user = new User(this);
+        //user = new User(this);
 
         //initialize listener
         messageListener = new MessageListener(){
