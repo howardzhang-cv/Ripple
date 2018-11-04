@@ -15,15 +15,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-
-        // Create new fragment and transaction
-        Fragment newFragment = new ChannelsFragment();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        // Replace whatever is in the fragment_container view with this fragment,
-        // and add the transaction to the back stack if needed
-        transaction.replace(R.id.fragment_container, newFragment);
-        // Commit the transaction
+        ChannelsFragment fragment = new ChannelsFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, fragment);
         transaction.commit();
     }
 

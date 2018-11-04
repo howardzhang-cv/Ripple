@@ -42,12 +42,14 @@ public class ChannelsFragment extends Fragment {
 
     private void setupRecyclerView(){
         mRecyclerView = getView().findViewById(R.id.channel_recycler_view);
+
+        mLayoutManager = new LinearLayoutManager(mContext);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
         ArrayList<String> test = new ArrayList<>();
         test.add("channel 1");
         test.add("channel 2");
         ChannelsAdapter adapter = new ChannelsAdapter(test);
-        mLayoutManager = new LinearLayoutManager(mContext);
-        mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(adapter);
     }
 
